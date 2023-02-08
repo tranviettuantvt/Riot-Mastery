@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import NavbarHeader from "./components/NavbarHeader";
+import "bootstrap/dist/css/bootstrap.min.css";
+import CarouselBanner from "./components/CarouselBanner";
+import CardItemList from "./components/CardItemList";
+import Footer from "./components/Footer";
+import PopupChat from "./components/PopupChat";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavbarHeader />
+      <div className="banner-list py-3">
+        <CarouselBanner />
+        <CardItemList />
+      </div>
+      <Footer />
+      <PopupChat />
     </div>
   );
 }

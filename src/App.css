@@ -1,38 +1,53 @@
-.App {
-  text-align: center;
+/* .App {
+    position: relative;
+} */
+/* Navbar */
+.activeNav {
+    color: white!important;
+    background-color: #198754;
+    border-radius: 4px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Banner */
+.banner {
+    height: 400px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.banner-list {
+    background-color: #F0EEF0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.carousel-caption-ban {
+    position: absolute;
+    bottom: 7.25rem;
+    left: 12%;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    color: #fff;
+    text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+#footer {
+    background-image: url('https://img.freepik.com/free-photo/white-concrete-wall_53876-92803.jpg?w=996&t=st=1675832041~exp=1675832641~hmac=6eba4b7762be5e45f5613634982e0a8a5389199482422ba2cfc4b05015bf90dc')
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* pop up */
+.pop-button{
+    position: fixed;
+    right: 3rem;
+    bottom: 3rem;
+    font-size: 2rem;
+    background-color: #08a308;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 4rem;
+    height: 3.5rem;
+}
+
+.popup-chat {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 99;
 }
