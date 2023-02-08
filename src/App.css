@@ -27,6 +27,44 @@
     text-align: center;
 }
 
+/*card item */
+.card-item {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.favourite-item, .eye-item {
+    position: absolute;
+    width: 3rem;
+    height: 2.5rem;
+    text-align: center;
+    font-size: 1.6rem;
+    background: white;
+    border: 2px solid green;
+    border-radius: 32%;
+    line-height: 2.5rem;
+    color: green;
+    display: none;
+    transition: transform .2s;
+}
+
+.favourite-item {
+    top: 1rem;
+    right: 1rem;
+}
+.eye-item {
+    top: 1rem;
+    left: 1rem;
+}
+
+.card:hover .favourite-item, .card:hover .eye-item {
+    display: block;
+}
+
+.favourite-item:hover, .eye-item:hover {
+    background-color: green;
+    color: white;
+}
+
 #footer {
     background-image: url('https://img.freepik.com/free-photo/white-concrete-wall_53876-92803.jpg?w=996&t=st=1675832041~exp=1675832641~hmac=6eba4b7762be5e45f5613634982e0a8a5389199482422ba2cfc4b05015bf90dc')
 }
@@ -34,15 +72,16 @@
 /* pop up */
 .pop-button{
     position: fixed;
-    right: 3rem;
+    right: 1rem;
     bottom: 3rem;
     font-size: 2rem;
-    background-color: #08a308;
+    background-color: #0c74d4;
     color: white;
     border: none;
     border-radius: 50%;
     width: 4rem;
     height: 3.5rem;
+    transition: transform .2s;
 }
 
 .popup-chat {
@@ -51,3 +90,73 @@
     right: 2rem;
     z-index: 99;
 }
+
+
+/* tdee */
+.tdee {
+    padding: 2rem 2rem 1rem 2rem;
+    border: 2px solid green;
+    border-radius: 8px;
+    background-color: #F0EEF0;
+}
+
+.tdee-button{
+    text-decoration: none;
+    position: fixed;
+    right: 1rem;
+    bottom: 7.5rem;
+    font-size: 2rem;
+    background-color: #08a308;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 4rem;
+    height: 3.5rem;
+    text-align: center;
+    padding-top: 3.5px;
+    transition: transform .2s;
+}
+.tdee-button:hover, .pop-button:hover {
+    color: white;
+    transform: scale(1.5)
+}
+
+
+/* reason */
+.reason {
+    background-color: #F0EEF0;
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    margin-top: 2rem;
+}
+
+.reason-descrip span {
+    display: inline-block;
+    width: 9rem;
+    background-color: white;
+    margin: 0.8rem 1rem 1.2rem 0;
+    height: 3rem;
+    line-height: 3rem;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.reason-descrip span i {
+    color: green;
+}
+
+/* testimonial */
+.testimonial-card .card-up {
+    height: 120px;
+    overflow: hidden;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+  }
+  .testimonial-card .avatar {
+    width: 110px;
+    margin-top: -60px;
+    overflow: hidden;
+    border: 3px solid #fff;
+    border-radius: 50%;
+  }

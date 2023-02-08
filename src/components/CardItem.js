@@ -3,7 +3,7 @@ import React from "react";
 function CardItem() {
   return (
     <div class="col-lg-4">
-      <div className="card">
+      <div className="card position-relative card-item">
         <div className="img-item p-3">
           <img src="./img/item2.jpg" class="card-img-top rounded" alt="..." />
         </div>
@@ -17,7 +17,10 @@ function CardItem() {
             Contact with Contributor
           </a>
         </div>
+        <a className="eye-item" href=""><i class="fa-solid fa-eye"></i></a>
+        <a className="favourite-item" href=""><i class="fa-sharp fa-solid fa-heart"></i></a>
       </div>
+
     </div>
   );
 }
