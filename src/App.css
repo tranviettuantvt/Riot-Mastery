@@ -55,8 +55,8 @@
     top: 1rem;
     left: 1rem;
 }
-
-.card:hover .favourite-item, .card:hover .eye-item {
+/* , */
+.card:hover .favourite-item,  .card:hover .eye-item {
     display: block;
 }
 

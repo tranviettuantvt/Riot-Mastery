@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import Button from 'react-bootstrap/Button';
+import { Food } from "../context";
+import CardtemDetail from "./CardtemDetail";
+
 
 function CardItem() {
+  const {handleShow}=useContext(Food)
+
   return (
     <div class="col-lg-4">
       <div className="card position-relative card-item">
@@ -17,8 +23,11 @@ function CardItem() {
             Contact with Contributor
           </a>
         </div>
-        <a className="eye-item" href=""><i class="fa-solid fa-eye"></i></a>
-        <a className="favourite-item" href=""><i class="fa-sharp fa-solid fa-heart"></i></a>
+        {/* <Button style={{display:"none"}} className="eye-item" variant="primary" onClick={handleShow}>
+          <i class="fa-solid fa-eye"></i>
+        </Button> */}
+        <button className="eye-item" href="" onClick={handleShow}><i class="fa-solid fa-eye"></i></button>
+        <a className="favourite-item" ><i class="fa-sharp fa-solid fa-heart"></i></a>
       </div>
 
     </div>
