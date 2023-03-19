@@ -1,41 +1,35 @@
 import "./App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import NavbarHeader from "./components/NavbarHeader";
 import "bootstrap/dist/css/bootstrap.min.css";
-import CarouselBanner from "./components/CarouselBanner";
-import CardItemList from "./components/CardItemList";
-import Footer from "./components/Footer";
-import PopupChat from "./components/PopupChat";
-import Tdee from "./components/Tdee";
-import Reason from "./components/Reason";
-import SliderList from "./components/SliderList";
-import { Food } from "./context";
-import { useState } from "react";
-import CardtemDetail from "./components/CardtemDetail";
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
-  const [show, setShow] = useState(false);
+  const {currentUser}=useContext(AuthContext)
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // check if auth login
+  const ProtectedRoute=({children})=> {
+    if(!currentUser){
+      return <Navigate to="/login"/>
+    }
+    return children
+  }
 
   return (
-    <div className="App">
-      <Food.Provider value={{ show, setShow, handleClose, handleShow }}>
-        <NavbarHeader />
-        <div className="banner-list py-3">
-          <CarouselBanner />
-          <CardItemList />
-          <CardtemDetail />
-        </div>
-        <Tdee />
-        <Reason />
-        <SliderList />
-        <Footer />
-        <PopupChat />
-      </Food.Provider>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Home/>}/>
+          <Route path="register" element={<Register />}/>
+          <Route path="login" element={<Login/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
