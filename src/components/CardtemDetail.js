@@ -47,20 +47,6 @@ function CardtemDetail() {
           <Accordion.Item eventKey="0">
             <Accordion.Header className="">Description</Accordion.Header>
             <Accordion.Body>
-              {/* <ul>
-                <li>
-                  Step2: eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua. Ut{" "}
-                </li>
-                <li>
-                  Step2: eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua. Ut{" "}
-                </li>
-                <li>
-                  Step2: eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua. Ut{" "}
-                </li>
-              </ul> */}
               {currentRecipe.step}
             </Accordion.Body>
           </Accordion.Item>

@@ -1,34 +1,134 @@
-import React, { useContext } from "react";
-import Button from 'react-bootstrap/Button';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import React, { useContext, useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router";
 import { Food } from "../context";
-import CardtemDetail from "./CardtemDetail";
+import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
+import { db } from "../firebase";
 
+function CardItem({ title, image, material, ingredient_id, user_id, rate }) {
+  const { handleShow } = useContext(Food);
+  const [author, setAuthor] = useState(null);
+  const { currentUser } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
+  const { handleOpen, showPopUp } = useContext(Food);
+  const navigate=useNavigate()
 
-function CardItem({title, image, material, ingredient_id}) {
-  const {handleShow}=useContext(Food)
+  useEffect(() => {
+    // get user from firebase through uid
+    const userRef = collection(db, "users");
+    const q = query(userRef, where("uid", "==", user_id));
+    getDocs(q)
+      .then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          const userData = querySnapshot.docs[0].data();
+          setAuthor(userData);
+        }
+      })
+      .catch((error) => {
+        console.log("Error retrieving user document:", error);
+      });
+  }, [user_id]);
+
+  const handleChatBox = async () => {
+    // check whether group exists, if not create new one
+    const combineId =
+      currentUser.uid > user_id
+        ? currentUser.uid + user_id
+        : user_id + currentUser.uid;
+    try {
+      const res = await getDoc(doc(db, "chats", combineId));
+      if (!res.exists()) {
+        // create chat in chats collection between two people
+        await setDoc(doc(db, "chats", combineId), { messages: [] });
+
+        // update user chats
+        await updateDoc(doc(db, "userChats", currentUser.uid), {
+          [combineId + ".userinfo"]: /*use variable and string together*/ {
+            uid: user_id,
+            displayName: author.displayName,
+            photoURL: author.photoURL,
+          },
+          [combineId + ".date"]: serverTimestamp(),
+        });
+
+        await updateDoc(doc(db, "userChats", user_id), {
+          [combineId + ".userinfo"]: /*use variable and string together*/ {
+            uid: currentUser.uid,
+            displayName: currentUser.displayName,
+            photoURL: currentUser.photoURL,
+          },
+          [combineId + ".date"]: serverTimestamp(),
+        });
+      }
+      dispatch({ type: "CHANGE_USER", payload: author });
+      handleOpen();
+      console.log(showPopUp);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleChat = () => {
+    if (!currentUser) {
+      navigate('/login')
+      alert("Login first")
+    }
+    if (user_id !== currentUser.uid) handleChatBox();
+  };
 
   return (
-    <div class="col-lg-4" style={{marginTop:"3rem"}}>
+    <div className="col-lg-4" style={{ marginTop: "3rem" }}>
       <div className="card position-relative card-item">
         <div className="img-item p-3">
-          <img src={image} class="card-img-top rounded" alt="..." style={{height:"15rem"}}/>
+          <img
+            src={image}
+            className="card-img-top rounded"
+            alt="..."
+            style={{ height: "15rem" }}
+          />
         </div>
-        <div class="card-body text-center">
-          <h5 class="card-title text-success">{title}</h5>
-          <p class="card-text">
-            {material}
-          </p>
-          <a href="#" class="btn btn-success">
-            Contact with Contributor
-          </a>
+        <div className="card-body text-center">
+          <h5 className="card-title text-success">{title}</h5>
+          <p className="card-text">{material}</p>
+          <div
+            className=""
+            style={{ display: "flex", justifyContent: "space-between" }}
+          >
+            <span>{`Đánh giá: ${rate}`}</span>
+            <div className="cardItem-author" onClick={handleChat}>
+              <img
+                src={author?.photoURL}
+                alt="avatar"
+                style={{ height: "40px", borderRadius: "100%" }}
+              />
+              <div class="about">
+                <div class="name">{author?.displayName}</div>
+              </div>
+            </div>
+          </div>
         </div>
-        {/* <Button style={{display:"none"}} className="eye-item" variant="primary" onClick={handleShow}>
-          <i class="fa-solid fa-eye"></i>
-        </Button> */}
-        <button className="eye-item" href="" onClick={()=>handleShow(ingredient_id)}><i class="fa-solid fa-eye"></i></button>
-        <a className="favourite-item" ><i class="fa-sharp fa-solid fa-heart"></i></a>
+        <button
+          className="eye-item"
+          href=""
+          onClick={() => handleShow(ingredient_id)}
+        >
+          <i className="fa-solid fa-eye"></i>
+        </button>
+        <a className="favourite-item">
+          <i className="fa-sharp fa-solid fa-heart"></i>
+        </a>
       </div>
-
     </div>
   );
 }

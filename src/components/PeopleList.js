@@ -134,7 +134,7 @@ function PeopleList() {
       </div>
       <ul class="list-unstyled chat-list mt-2 mb-0">
         {Object.entries(userChats)?.sort((a,b)=> b[1].date-a[1].date).map((chat) => (
-          <li class="clearfix" key={chat[0]} onClick={()=>handleSelectUserChat(chat[1].userinfo)}>
+          <li class="clearfix" style={{display:"flex"}} key={chat[0]} onClick={()=>handleSelectUserChat(chat[1].userinfo)}>
             <img src={chat[1].userinfo.photoURL} alt="avatar" />
             <div class="about">
               <div class="name">{chat[1].userinfo.displayName}</div>

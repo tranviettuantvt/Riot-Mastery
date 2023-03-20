@@ -218,9 +218,9 @@ body{
 }
 
 .people-list .chat-list li {
-  padding: 10px 15px;
   list-style: none;
-  border-radius: 3px
+  border-radius: 3px;
+  display: flex;
 }
 
 .people-list .chat-list li:hover {
@@ -236,9 +236,10 @@ body{
   font-size: 15px
 }
 
-.people-list .chat-list img {
+.chat .chat-header img,.people-list .chat-list img {
   width: 45px;
-  border-radius: 50%
+  height: 45px;
+  border-radius: 100%
 }
 
 .people-list img {
@@ -263,8 +264,7 @@ body{
 
 .chat .chat-header img {
   float: left;
-  border-radius: 40px;
-  width: 40px
+  
 }
 
 .chat .chat-header .chat-about {
@@ -439,4 +439,15 @@ body{
       height: calc(100vh - 350px);
       overflow-x: auto
   }
+}
+
+.cardItem-author:hover {
+  cursor: pointer;
+  background-color: rgb(206, 206, 206);
+}
+.cardItem-author {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
 }

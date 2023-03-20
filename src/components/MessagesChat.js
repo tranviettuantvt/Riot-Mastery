@@ -94,6 +94,7 @@ function MessagesChat({ handleOpen }) {
             <li class="clearfix" ref={ref}>
               <div class={`message-data ${m.senderId === currentUser.uid && "text-end"}`}>
                 <img
+                style={{height:"42px",borderRadius:"100%"}}
                   src={
                     m.senderId === currentUser.uid
                       ? currentUser.photoURL

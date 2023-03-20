@@ -82,7 +82,7 @@ function NavbarHeader() {
                 className="user"
                 style={{ display: "flex", alignItems: "center" }}
               >
-                <img src={currentUser.photoURL} alt="" style={{width:"40px", height:"40px"}}/>
+                <img src={currentUser.photoURL} alt="" style={{width:"40px", height:"40px", borderRadius:"100%"}}/>
                 <span>{currentUser.displayName}</span>
                 <button onClick={(e) => {e.preventDefault();signOut(auth)}}>logout</button>
               </div>

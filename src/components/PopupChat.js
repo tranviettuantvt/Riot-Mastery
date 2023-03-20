@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PeopleList from "./PeopleList";
 import MessagesChat from "./MessagesChat";
+import { Food } from "../context";
 
 function PopupChat() {
-  const [showPopUp, setshowPopUp] = useState(false);
-
-  const handleOpen = () => {
-    setshowPopUp(!showPopUp);
-  };
+  const {showPopUp, handleOpen} =useContext(Food)
 
   return (
     <div>
