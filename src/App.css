@@ -112,6 +112,25 @@
 }
 
 /* tdee */
+.tdee-result {
+  padding: 1rem 2rem;
+  border: 2px solid green;
+  border-radius: 8px;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tdee-buttonn {
+  width: 8rem;
+    padding: 8px;
+    background-color: #198553;
+    color: white;
+    outline: none;
+    border: none;
+    margin-top: 2rem;
+}
+
 .tdee {
   padding: 2rem 2rem 1rem 2rem;
   border: 2px solid green;

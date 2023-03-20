@@ -22,7 +22,6 @@ function CardItemList() {
   }, [])
 
   
-
   return (
     <div className="container my-5">
       <div className="itemList-title text-center mb-3">
