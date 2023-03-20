@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Food } from "../context";
 import { AuthContext } from "../context/AuthContext";
@@ -9,6 +9,13 @@ function NavbarHeader() {
   const { setSearchRecipe } = useContext(Food);
   const { currentUser } = useContext(AuthContext);
 
+  const [activeLink, setActiveLink] = useState("");
+
+
+  useEffect(() => {
+    const currentLink = window.location.pathname.split("/")[1];
+    setActiveLink(currentLink);
+  }, [activeLink]);
   return (
     <nav
       class="navbar navbar-expand-lg navbar-light bg-white fixed-top"
@@ -35,24 +42,32 @@ function NavbarHeader() {
         >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
             <li class="nav-item px-3 ">
-              <a class="nav-link activeNav" aria-current="page" href="#">
+              <Link className={`nav-link ${activeLink === "" ? "activeNav" : ""}`}
+                to="/"
+                onClick={() => setActiveLink("")}>
                 Home Page
-              </a>
+              </Link>
             </li>
             <li class="nav-item px-3">
-              <a class="nav-link " href="#">
+              <Link className={`nav-link ${activeLink === "HealthyAndDiet" ? "activeNav" : ""}`}
+                to="/HealthyAndDiet"
+                onClick={() => setActiveLink("HealthyAndDiet")}>
                 Healthy and Diet
-              </a>
+              </Link>
             </li>
             <li class="nav-item px-3">
-              <a class="nav-link" href="#">
+              <Link className={`nav-link ${activeLink === "forum" ? "activeNav" : ""}`}
+                to="/forum"
+                onClick={() => setActiveLink("forum")}>
                 Forum
-              </a>
+              </Link>
             </li>
             <li class="nav-item px-3">
-              <a class="nav-link" href="#">
+              <Link className={`nav-link ${activeLink === "fitness" ? "activeNav" : ""}`}
+                to="/fitness"
+                onClick={() => setActiveLink("fitness")} >
                 Fitness
-              </a>
+              </Link>
             </li>
           </ul>
           <form class="d-flex" style={{ marginRight: "1rem" }}>
@@ -82,9 +97,9 @@ function NavbarHeader() {
                 className="user"
                 style={{ display: "flex", alignItems: "center" }}
               >
-                <img src={currentUser.photoURL} alt="" style={{width:"40px", height:"40px", borderRadius:"100%"}}/>
+                <img src={currentUser.photoURL} alt="" style={{ width: "40px", height: "40px" }} />
                 <span>{currentUser.displayName}</span>
-                <button onClick={(e) => {e.preventDefault();signOut(auth)}}>logout</button>
+                <button onClick={(e) => { e.preventDefault(); signOut(auth) }}>logout</button>
               </div>
             )}
           </form>

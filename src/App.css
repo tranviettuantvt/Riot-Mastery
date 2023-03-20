@@ -28,11 +28,12 @@
 .carousel-caption-ban {
   position: absolute;
   bottom: 7.25rem;
-  left: 12%;
+  left: 10%;
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
   color: #fff;
-  text-align: center;
+  text-align: left;
+  width: 500px;
 }
 
 /*card item */
@@ -469,4 +470,13 @@ body{
     justify-content: center;
     align-items: center;
     gap: 6px;
+}
+
+
+.fitness-card {
+  width: 416px;
+  height: 100%;
+  border-radius: 1rem;
+    padding: 1rem 1.5rem 2rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

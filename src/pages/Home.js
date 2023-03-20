@@ -49,7 +49,8 @@ function Home() {
           searchRecipe,
           setSearchRecipe,
           showPopUp, setshowPopUp,
-          handleOpen
+          handleOpen,
+        
         }}
       >
         <NavbarHeader />
