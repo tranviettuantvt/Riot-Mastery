@@ -88,8 +88,8 @@ function CardItem({ title, image, material, ingredient_id, user_id, rate }) {
   };
 
   return (
-    <div className="col-lg-4" style={{ marginTop: "3rem" }}>
-      <div className="card position-relative card-item">
+    <div className="col-lg-4" style={{ marginTop: "1rem" }}>
+      <div className="card position-relative card-item" style={{height:"466px"}}>
         <div className="img-item p-3">
           <img
             src={image}

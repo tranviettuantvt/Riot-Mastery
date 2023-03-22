@@ -24,6 +24,10 @@ const findRecipeByTitle = (title) => {
   return http.get(`/recipes?title=${title}`);
 };
 
+const findRecipeByUserId=(userId) => {
+  return http.get(`/recipes/userId/${userId}`)
+} 
+
 export {
   getAllRecipes,
   getRecipeById,
@@ -31,4 +35,5 @@ export {
   updateRecipe,
   removeRecipe,
   findRecipeByTitle,
+  findRecipeByUserId
 };

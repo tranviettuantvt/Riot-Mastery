@@ -11,18 +11,38 @@ import { AuthContext } from "./context/AuthContext";
 import HealthyAndDiet from "./pages/HealthyAndDiet";
 import Fitness from "./pages/Fitness";
 import Forum from "./pages/Forum";
+import ManageRecipe from "./pages/ManageRecipe";
+import Admin from "./pages/Admin";
+import AllAdRecipe from "./pages/AllAdRecipe";
+import AllUser from "./pages/AllUser";
 
 function App() {
-  const {currentUser}=useContext(AuthContext)
-
+  const { currentUser, userAuthorization } = useContext(AuthContext);
   // check if auth login
-  const ProtectedRoute=({children})=> {
-    if(!currentUser){
-      return <Navigate to="/login"/>
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
     }
-    return children
-  }
+    return children;
+  };
 
+  const ProtectedManage = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
+    }
+    return children;
+  };
+
+  const ProtectedAdmin = ({ children }) => {
+    console.log(currentUser, userAuthorization);
+    if (!currentUser || parseInt(userAuthorization) !== 2) {
+      console.log("login");
+      return <Navigate to="/login" />;
+    }
+    console.log(parseInt(userAuthorization));
+    return children;
+  };
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -33,6 +53,26 @@ function App() {
           <Route path="HealthyAndDiet" element={<HealthyAndDiet />} />
           <Route path="forum" element={<Forum />} />
           <Route path="fitness" element={<Fitness />} />
+          <Route
+            path="manage"
+            element={
+              <ProtectedManage>
+                <ManageRecipe />
+              </ProtectedManage>
+            }
+          />
+          <Route
+            path="admin"
+            element={
+              <ProtectedAdmin>
+                <Admin />
+              </ProtectedAdmin>
+            }
+          >
+            <Route index element={<AllAdRecipe/>}/>
+            <Route path="allRecipe" element={<AllAdRecipe/>}/>
+            <Route path="allUser" element={<AllUser/>}/>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
