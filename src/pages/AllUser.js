@@ -9,21 +9,19 @@ function AllUser() {
   const [users, setUsers] = useState([]);
   const [show, setShow] = useState(false);
   const [trigger, setTrigger] = useState(false);
-  const auth = getAuth();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleDeleteUser = async (id) => {
-    // delete user in cloud firestore
+    // Delete user from Firestore
     await deleteDoc(doc(db, "users", id));
 
     // delete user in authentication
+    const auth = getAuth();
     deleteUser(auth, id)
-      .then(() => console.log("success"))
-      .catch((error) => {
-        console.error("Error deleting user:", error);
-      });
+      .then(() => console.log("User deleted."))
+      .catch((error) => console.error("Error deleting user:", error));
 
     setTrigger(!trigger);
   };

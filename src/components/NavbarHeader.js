@@ -11,7 +11,6 @@ function NavbarHeader() {
 
   const [activeLink, setActiveLink] = useState("");
 
-
   useEffect(() => {
     const currentLink = window.location.pathname.split("/")[1];
     setActiveLink(currentLink);
@@ -42,30 +41,44 @@ function NavbarHeader() {
         >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
             <li class="nav-item px-3 ">
-              <Link className={`nav-link ${activeLink === "" ? "activeNav" : ""}`}
+              <Link
+                className={`nav-link ${activeLink === "" ? "activeNav" : ""}`}
                 to="/"
-                onClick={() => setActiveLink("")}>
+                onClick={() => setActiveLink("")}
+              >
                 Home Page
               </Link>
             </li>
             <li class="nav-item px-3">
-              <Link className={`nav-link ${activeLink === "HealthyAndDiet" ? "activeNav" : ""}`}
+              <Link
+                className={`nav-link ${
+                  activeLink === "HealthyAndDiet" ? "activeNav" : ""
+                }`}
                 to="/HealthyAndDiet"
-                onClick={() => setActiveLink("HealthyAndDiet")}>
+                onClick={() => setActiveLink("HealthyAndDiet")}
+              >
                 Healthy and Diet
               </Link>
             </li>
             <li class="nav-item px-3">
-              <Link className={`nav-link ${activeLink === "forum" ? "activeNav" : ""}`}
+              <Link
+                className={`nav-link ${
+                  activeLink === "forum" ? "activeNav" : ""
+                }`}
                 to="/forum"
-                onClick={() => setActiveLink("forum")}>
+                onClick={() => setActiveLink("forum")}
+              >
                 Forum
               </Link>
             </li>
             <li class="nav-item px-3">
-              <Link className={`nav-link ${activeLink === "fitness" ? "activeNav" : ""}`}
+              <Link
+                className={`nav-link ${
+                  activeLink === "fitness" ? "activeNav" : ""
+                }`}
                 to="/fitness"
-                onClick={() => setActiveLink("fitness")} >
+                onClick={() => setActiveLink("fitness")}
+              >
                 Fitness
               </Link>
             </li>
@@ -85,7 +98,11 @@ function NavbarHeader() {
               ></i>
             </a>
             {!currentUser && (
-              <Link to="/login" class="border border-dark py-1 px-2 rounded" href="#">
+              <Link
+                to="/login"
+                class="border border-dark py-1 px-2 rounded"
+                href="#"
+              >
                 <i
                   style={{ color: "rgb(50, 50, 50)" }}
                   class="fa-solid fa-user-plus"
@@ -97,9 +114,24 @@ function NavbarHeader() {
                 className="user"
                 style={{ display: "flex", alignItems: "center" }}
               >
-                <img src={currentUser.photoURL} alt="" style={{ width: "40px", height: "40px" }} />
-                <span>{currentUser.displayName}</span>
-                <button onClick={(e) => { e.preventDefault(); signOut(auth) }}>logout</button>
+                <Link to="/profileUser">
+                  <div className="" style={{ width: "80px", height: "40px" }}>
+                    <img
+                      src={currentUser.photoURL}
+                      alt=""
+                      style={{ width: "40px", height: "100%" }}
+                    />
+                    <span>{currentUser.displayName}</span>
+                  </div>
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signOut(auth);
+                  }}
+                >
+                  logout
+                </button>
               </div>
             )}
           </form>

@@ -15,6 +15,7 @@ import ManageRecipe from "./pages/ManageRecipe";
 import Admin from "./pages/Admin";
 import AllAdRecipe from "./pages/AllAdRecipe";
 import AllUser from "./pages/AllUser";
+import ProfileUser from "./pages/ProfileUser";
 
 function App() {
   const { currentUser, userAuthorization } = useContext(AuthContext);
@@ -48,6 +49,7 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
+          <Route path="profileUser" element={<ProfileUser/>}/>
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="HealthyAndDiet" element={<HealthyAndDiet />} />
