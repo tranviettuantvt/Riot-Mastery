@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal, Input } from "react-bootstrap";
 import { getRecipeById, updateRecipe } from "../api/RecipeService";
 
-function EditRecipe({
-  trigger,
-  setTrigger,
-  editId,
-  setShowEdit,
-  showedit,
-}) {
+function EditRecipe({ trigger, setTrigger, editId, setShowEdit, showedit }) {
   const [initialRecipe, setInitialRecipe] = useState({
     user_id: "",
     title: "",
@@ -16,7 +10,7 @@ function EditRecipe({
     material: "",
     origin: "",
     time: "",
-    rate: "",
+    healthy: "",
     image: "",
   });
 
@@ -39,7 +33,7 @@ function EditRecipe({
     updateRecipe(editId, initialRecipe)
       .then((res) => {
         setTrigger(!trigger);
-        setShowEdit(false)
+        setShowEdit(false);
       })
       .catch((e) => console.log(e));
   };
@@ -114,14 +108,17 @@ function EditRecipe({
               />
             </div>
             <div class="form-group mt-3">
-              <input
-                type="text"
+              <select
                 class="form-control"
-                placeholder="Do kho"
-                value={initialRecipe.rate}
+                name="healthy"
+                value={initialRecipe.healthy}
                 onChange={handleInputEdit}
-                name="rate"
-              />
+              >
+                <option value="0" selected>
+                  Normal
+                </option>
+                <option value="1">Healthy</option>
+              </select>
             </div>
             <div class="form-group mt-3">
               <textarea

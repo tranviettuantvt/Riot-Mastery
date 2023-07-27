@@ -91,12 +91,14 @@ function NavbarHeader() {
               placeholder="Search"
               aria-label="Search"
             />
-            <a class="border border-dark py-1 px-2 rounded me-2" href="#">
-              <i
-                style={{ color: "rgb(50, 50, 50)" }}
-                class="fa-solid fa-heart"
-              ></i>
-            </a>
+            <Link to="/favorite">
+              <a class="border border-dark py-1 px-2 rounded me-2" href="#">
+                <i
+                  style={{ color: "rgb(50, 50, 50)" }}
+                  class="fa-solid fa-heart"
+                ></i>
+              </a>
+            </Link>
             {!currentUser && (
               <Link
                 to="/login"

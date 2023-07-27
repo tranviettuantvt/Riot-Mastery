@@ -18,7 +18,7 @@ function AllAdRecipe() {
     material: "",
     origin: "",
     time: "",
-    rate: "",
+    healthy: "0",
     image: "",
   });
 
@@ -61,7 +61,7 @@ function AllAdRecipe() {
             style={{ color: "green" }}
           >
             <h2>
-              <b>Student Details</b>
+              <b>Manage All Recipe </b>
             </h2>
           </div>
           <div class="col-sm-2 offset-sm-2  mt-5 mb-4 text-gred">
@@ -79,12 +79,12 @@ function AllAdRecipe() {
               <thead>
                 <tr>
                   <th style={{ width: "15%" }}>Image</th>
-                  <th style={{ width: "5%" }}>Title</th>
+                  <th style={{ width: "7%" }}>Title</th>
                   <th style={{ width: "5%" }}>Author</th>
                   <th style={{ width: "15%" }}>material</th>
                   <th style={{ width: "4%" }}>origin </th>
-                  <th style={{ width: "7%" }}>time </th>
-                  <th style={{ width: "4%" }}>rate</th>
+                  <th style={{ width: "5%" }}>time </th>
+                  <th style={{ width: "6%" }}>Healthy</th>
                   <th>step</th>
                   <th style={{ width: "3%" }}></th>
                 </tr>

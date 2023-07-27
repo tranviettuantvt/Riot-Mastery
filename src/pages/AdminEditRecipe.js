@@ -16,7 +16,7 @@ function AdminEditRecipe({
     material: "",
     origin: "",
     time: "",
-    rate: "",
+    healthy: "",
     image: "",
   });
 
@@ -34,13 +34,12 @@ function AdminEditRecipe({
     if (editId) getRecipeByIdd(editId);
   }, [editId]);
 
-
   const handleEditRecipe = (e) => {
     e.preventDefault();
     updateRecipe(editId, initialRecipe)
       .then((res) => {
         setTrigger(!trigger);
-        setShowEdit(false)
+        setShowEdit(false);
       })
       .catch((e) => console.log(e));
   };
@@ -128,14 +127,17 @@ function AdminEditRecipe({
                 />
               </div>
               <div class="form-group mt-3">
-                <input
-                  type="text"
+                <select
                   class="form-control"
-                  placeholder="Do kho"
-                  value={initialRecipe.rate}
+                  name="healthy"
+                  value={initialRecipe.healthy}
                   onChange={handleInputEdit}
-                  name="rate"
-                />
+                >
+                  <option value="0" selected>
+                    Normal
+                  </option>
+                  <option value="1">Healthy</option>
+                </select>
               </div>
               <div class="form-group mt-3">
                 <textarea

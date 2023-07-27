@@ -15,14 +15,23 @@ import { Food } from "../context";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { db } from "../firebase";
+import { addtoFavorite } from "../api/FavouriteService";
 
-function CardItem({ title, image, material, ingredient_id, user_id, rate }) {
+function CardItem({
+  title,
+  image,
+  material,
+  ingredient_id,
+  user_id,
+  rate,
+  time,
+}) {
   const { handleShow } = useContext(Food);
   const [author, setAuthor] = useState(null);
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
   const { handleOpen, showPopUp } = useContext(Food);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     // get user from firebase through uid
@@ -81,15 +90,27 @@ function CardItem({ title, image, material, ingredient_id, user_id, rate }) {
 
   const handleChat = () => {
     if (!currentUser) {
-      navigate('/login')
-      alert("Login first")
+      navigate("/login");
+      alert("Login first");
     }
     if (user_id !== currentUser.uid) handleChatBox();
   };
 
+  const addtooFavorite = (ingredientId) => {
+    let data = {
+      ingredient_id: ingredientId,
+      user_id: currentUser.uid,
+    };
+    addtoFavorite(data)
+      .then((res) => console.log(res.data))
+      .catch((e) => console.log(e));
+  };
   return (
     <div className="col-lg-4" style={{ marginTop: "1rem" }}>
-      <div className="card position-relative card-item" style={{height:"466px"}}>
+      <div
+        className="card position-relative card-item"
+        style={{ height: "466px" }}
+      >
         <div className="img-item p-3">
           <img
             src={image}
@@ -105,7 +126,7 @@ function CardItem({ title, image, material, ingredient_id, user_id, rate }) {
             className=""
             style={{ display: "flex", justifyContent: "space-between" }}
           >
-            <span>{`Đánh giá: ${rate}`}</span>
+            <span>{`Thoi gian nau: ${time}`}</span>
             <div className="cardItem-author" onClick={handleChat}>
               <img
                 src={author?.photoURL}
@@ -118,16 +139,15 @@ function CardItem({ title, image, material, ingredient_id, user_id, rate }) {
             </div>
           </div>
         </div>
-        <button
-          className="eye-item"
-          href=""
-          onClick={() => handleShow(ingredient_id)}
-        >
+        <button className="eye-item" onClick={() => handleShow(ingredient_id)}>
           <i className="fa-solid fa-eye"></i>
         </button>
-        <a className="favourite-item">
+        <button
+          className="favourite-item"
+          onClick={() => addtooFavorite(ingredient_id)}
+        >
           <i className="fa-sharp fa-solid fa-heart"></i>
-        </a>
+        </button>
       </div>
     </div>
   );

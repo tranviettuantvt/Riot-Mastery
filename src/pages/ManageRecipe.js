@@ -23,10 +23,10 @@ function ManageRecipe() {
     material: "",
     origin: "",
     time: "",
-    rate: "",
+    healthy: "0",
     image: "",
   });
-  const [idRecEdit, setIdRecEdit]=useState(null)
+  const [idRecEdit, setIdRecEdit] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -56,7 +56,7 @@ function ManageRecipe() {
       material: initialRecipe.material,
       origin: initialRecipe.origin,
       time: initialRecipe.time,
-      rate: initialRecipe.rate,
+      healthy: initialRecipe.healthy,
       image: initialRecipe.image,
     };
     createRecipe(data)
@@ -71,7 +71,7 @@ function ManageRecipe() {
           material: "",
           origin: "",
           time: "",
-          rate: "",
+          healthy: "",
           image: "",
         });
       })
@@ -86,11 +86,16 @@ function ManageRecipe() {
   };
 
   // handle trigger edit modal
-  const handleEdit=(id) => {
-    setIdRecEdit(id)
-    setShowEdit(true)
-  }
+  const handleEdit = (id) => {
+    setIdRecEdit(id);
+    setShowEdit(true);
+  };
 
+  const breakline = (texts) => {
+    const text = texts;
+    const steps = text.split("Bước ").filter((step) => step !== "");
+    return steps.map((step, index) => <li key={index}>{step.trim()}</li>);
+  };
   return (
     <div class=" ">
       <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
@@ -105,12 +110,12 @@ function ManageRecipe() {
             style={{ color: "green" }}
           >
             <h2>
-              <b>Student Details</b>
+              <b>Manage your Recipe</b>
             </h2>
           </div>
           <div class="col-sm-2 offset-sm-2  mt-5 mb-4 text-gred">
             <Button variant="primary" onClick={handleShow}>
-              Add New Student
+              Add New Recipe
             </Button>
           </div>
         </div>
@@ -123,11 +128,11 @@ function ManageRecipe() {
               <thead>
                 <tr>
                   <th style={{ width: "15%" }}>Image</th>
-                  <th style={{ width: "5%" }}>Title </th>
+                  <th style={{ width: "6%" }}>Title </th>
                   <th style={{ width: "15%" }}>material</th>
                   <th style={{ width: "4%" }}>origin </th>
                   <th style={{ width: "7%" }}>time </th>
-                  <th style={{ width: "4%" }}>rate</th>
+                  <th style={{ width: "5%" }}>Healthy</th>
                   <th>step</th>
                   <th style={{ width: "3%" }}></th>
                 </tr>
@@ -143,15 +148,15 @@ function ManageRecipe() {
                           alt=""
                         />
                       </td>
-                      <td>{recipe.title}</td>
+                      <td style={{ wordWrap: "break-word" }}>{recipe.title}</td>
                       <td>{recipe.material}</td>
                       <td>{recipe.origin}</td>
                       <td>{recipe.time}</td>
-                      <td>{recipe.rate}</td>
-                      <td>{recipe.step}</td>
+                      <td>{recipe.healthy == 0 ? "Normal" : "Healthy"}</td>
+                      <td>{breakline(recipe.step)}</td>
                       <td>
                         <span
-                          onClick={ ()=>handleEdit(recipe.ingredient_id) }
+                          onClick={() => handleEdit(recipe.ingredient_id)}
                           class="edit"
                           title="Edit"
                           data-toggle="tooltip"
@@ -247,17 +252,29 @@ function ManageRecipe() {
                   />
                 </div>
                 <div class="form-group mt-3">
-                  <input
+                  {/* <input
                     type="text"
                     class="form-control"
                     placeholder="Do kho"
-                    value={initialRecipe.rate}
+                    value={initialRecipe.healthy}
                     onChange={handleInputAdd}
-                    name="rate"
-                  />
+                    name="healthy"
+                  /> */}
+                  <select
+                    class="form-control"
+                    name="healthy"
+                    value={initialRecipe.healthy}
+                    onChange={handleInputAdd}
+                  >
+                    <option value="0" selected>
+                      Normal
+                    </option>
+                    <option value="1">Healthy</option>
+                  </select>
                 </div>
                 <div class="form-group mt-3">
                   <textarea
+                    placeholder="Nhap ro cac Buoc"
                     class="form-control"
                     cols="30"
                     rows="10"
@@ -287,7 +304,13 @@ function ManageRecipe() {
           {/* Model Box Finsihs */}
         </div>
         {/* model box edit */}
-        <EditRecipe trigger={trigger} setTrigger={setTrigger} editId={idRecEdit} showedit={showedit} setShowEdit={setShowEdit}/>
+        <EditRecipe
+          trigger={trigger}
+          setTrigger={setTrigger}
+          editId={idRecEdit}
+          showedit={showedit}
+          setShowEdit={setShowEdit}
+        />
       </div>
     </div>
   );

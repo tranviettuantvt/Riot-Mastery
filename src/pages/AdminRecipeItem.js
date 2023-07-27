@@ -14,7 +14,7 @@ function AdminRecipeItem({
   material,
   origin,
   time,
-  rate,
+  healthy,
   step,
   ingredient_id,
 }) {
@@ -41,23 +41,29 @@ function AdminRecipeItem({
       });
   }, [user_id]);
 
+   const breakline = (texts) => {
+    const text = texts;
+    const steps = text.split("Bước ").filter((step) => step !== "");
+    return steps.map((step, index) => <li key={index}>{step.trim()}</li>);
+  };
+
   return (
     <tr>
       <td>
         <img style={{ width: "100%" }} src={image} alt="" />
       </td>
-      <td>{title},</td>
+      <td style={{wordBreak:"break-word"}}>{title},</td>
       <td>
         <td>
-          <img src={author?.photoURL} alt="" />
+          <img style={{width:"100%", borderRadius:"100%"}} src={author?.photoURL} alt="" />
           <span>{author?.displayName}</span>
         </td>
       </td>
       <td>{material}</td>
       <td>{origin}</td>
       <td>{time}</td>
-      <td>{rate}</td>
-      <td>{step}</td>
+      <td>{healthy == 0?'Normal':'Healthy'}</td>
+      <td>{breakline(step)}</td>
       <td>
         <span
           onClick={() => handleEdit(ingredient_id)}

@@ -52,7 +52,7 @@ function CardItemList() {
         {recipes &&
           recipes
             .filter((recipe) => {
-              return recipe.title.toLowerCase().match(searchRecipe);
+              return recipe.title.toLowerCase().match(searchRecipe) || recipe.origin.toLowerCase().match(searchRecipe);
             })
             .map((recipe, index) => <CardItem key={index} {...recipe} />)}
       </div>

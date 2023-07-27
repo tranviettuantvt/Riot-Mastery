@@ -54,13 +54,13 @@ function AllUser() {
               style={{ color: "green" }}
             >
               <h2>
-                <b>Student Details</b>
+                <b>All Users</b>
               </h2>
             </div>
             <div class="col-sm-2 offset-sm-2  mt-5 mb-4 text-gred">
-              <Button variant="primary" onClick={handleShow}>
+              {/* <Button variant="primary" onClick={handleShow}>
                 Add New Student
-              </Button>
+              </Button> */}
             </div>
           </div>
           <div class="row">
@@ -72,7 +72,7 @@ function AllUser() {
                 <thead>
                   <tr>
                     <th style={{ width: "5%" }}>User_ID</th>
-                    <th style={{ width: "15%" }}>Image </th>
+                    <th style={{ width: "15%" }}>Avatar </th>
                     <th style={{ width: "5%" }}>Name</th>
                     <th style={{ width: "10%" }}>Email </th>
                     <th style={{ width: "7%" }}>Role </th>
